@@ -8,54 +8,87 @@
     background-color: gray;
     padding: 1em;
   }
-  .display {
+  #display {
     margin-bottom: 0.5em;
+    margin-top: 1.5em;
     height: 50px;
+    width: 90%;
+    text-align: right;
   }
   .button {
     background-color: whitesmoke;
     margin: 3px;
     width: 50px;
-    height: 40px;
+    height: 60px;
   }
   </style>
   <title>計算機</title>
 </head>
 <body>
   <h1>計算機</h1>
+  <h2>kadai2020-3</h2>
   <div class="main">
-    <input type="text" class="display" id="result">
+    <input type="text" id="display">
     <div>
-      <input type="button" class="button" value="7">
-      <input type="button" class="button" value="8">
-      <input type="button" class="button" value="9">
-      <input type="button" class="button" value="+">
+      <input type="button" class="button" value="7" onclick="append(7)">
+      <input type="button" class="button" value="8" onclick="append(8)">
+      <input type="button" class="button" value="9" onclick="append(9)">
+      <input type="button" class="button" value="+" onclick="calc('+')">
     </div>
     <div>
-      <input type="button" class="button" value="4">
-      <input type="button" class="button" value="5">
-      <input type="button" class="button" value="6">
-      <input type="button" class="button" value="-">
+      <input type="button" class="button" value="4" onclick="append(4)">
+      <input type="button" class="button" value="5" onclick="append(5)">
+      <input type="button" class="button" value="6" onclick="append(6)">
+      <input type="button" class="button" value="-" onclick="calc('-')">
     </div>
     <div>
-      <input type="button" class="button" value="1">
-      <input type="button" class="button" value="2">
-      <input type="button" class="button" value="3">
-      <input type="button" class="button" value="×">
+      <input type="button" class="button" value="1" onclick="append(1)">
+      <input type="button" class="button" value="2" onclick="append(2)">
+      <input type="button" class="button" value="3" onclick="append(3)">
+      <input type="button" class="button" value="×" onclick="calc('*')">
     </div>
     <div>
-      <input type="button" class="button" value="0">
-      <input type="button" class="button" value=".">
-      <input type="button" class="button" value="√">
-      <input type="button" class="button" value="÷">
-    </div>
-    <div>
-      <input type="button" class="button" value="CA">
-      <input type="button" class="button" value="=">
+      <input type="button" class="button" value="0" onclick="append(0)">
+      <input type="button" class="button" value="÷" onclick="calc('/')">
+      <input type="button" class="button" onclick="clearall()" value="CA">
+      <input type="button" class="button" onclick="calc('=')" value="=">
     </div>
   </div>
+
   <script language="javascript" type="text/javascript">
-    
+    let inputdata = "";
+    let totaldata = 0;
+    let operator = "+";
+    let sign = 2;
+
+    function clearall(){
+      inputdata = "";
+      totaldata = 0;
+      operator = "+";
+      document.getElementById("display").value = inputdata;
+    };
+
+    function append(n){
+      sign = 1;
+      inputdata += n;
+      document.getElementById("display").value = inputdata;
+    };
+
+    function calc(n){
+      if (sign == 1){
+        sign = 2;
+        let calcdata = totaldata + operator + inputdata;
+        totaldata = eval(calcdata);
+        inputdata = "";
+        document.getElementById("display").value = totaldata;
+      }	
+      if (n === "="){
+        totaldata = 0;
+        operator = "+";
+      }else{
+        operator = n;
+      };
+    };
   </script>
 </body>
 </html>
